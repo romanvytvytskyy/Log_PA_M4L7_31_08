@@ -21,6 +21,15 @@
                 </div>
             </div>
             <div class="card-body">
+                {%if task.attachment %}
+                    <div class="alert alert-light" role="alert">
+                        <strong> Вкладення </strong>
+                        <a href="{{task.attachment.url}}" target="_blank">
+                            {{task.filename}}
+                        </a>
+                    </div>
+                {%endif%}
+
                 <div class="mb-3">
                     <h6>Опис:</h6>
                     <p>{{ task.description|linebreaks }}</p>

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+import os
 
 # Create your models here.
 class Task(models.Model):
@@ -26,13 +27,22 @@ class Task(models.Model):
     due_date = models.DateField(verbose_name='Термірмін виконання', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    
+    attachment = models.FileField(
+         upload_to='attachments/%Y/%m/%d', 
+         verbose_name="Вкладення",
+         null = True,
+         blank=True,
+        )
     
     def __str__(self):
         return self.title
     
     def get_absolute_url(self):
         return reverse("task_detail", kwargs={"pk": self.pk})
+    
+    @property
+    def filename(self):
+        return os.path.basename(self.attachment.name)
     
     class Meta:
         ordering = ['-created_at']

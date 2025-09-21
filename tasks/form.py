@@ -8,7 +8,8 @@ class TaskForm(forms.ModelForm):
             'description', 
             'status',
             'priority',
-            'due_date'
+            'due_date',
+            'attachment',
             ]
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
